@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Clients from "./components/Clients";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 const client = new ApolloClient({
@@ -11,8 +12,8 @@ function App() {
     <>
     <ApolloProvider client={client}>
      <Header />
+     <Clients />
       <div className="container">
-       <h1>hello world</h1>
       </div>
     </ApolloProvider>
     </>
