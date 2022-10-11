@@ -12,13 +12,14 @@ export default function DeleteProjectButton({ projectId }) {
     const [deleteProject] = useMutation(DELETE_PROJECT, {
         variables: { id: projectId },
         onCompleted: () => navigate("/"),
-        update(cache) {
-        const { projects } = cache.readQuery({ query: GET_PROJECTS });
-        cache.writeQuery({
-            query: GET_PROJECTS,
-            data: { projects: projects.filter((p) => p.id !== projectId) },
-        });
-        },
+        refetchQueries: [{ query: GET_PROJECTS }],
+        // update(cache) {
+        // const { projects } = cache.readQuery({ query: GET_PROJECTS });
+        // cache.writeQuery({
+        //     query: GET_PROJECTS,
+        //     data: { projects: projects.filter((p) => p.id !== projectId) },
+        // });
+        // },
     });
     
     return (
@@ -30,7 +31,7 @@ export default function DeleteProjectButton({ projectId }) {
             }
         }}
         >
-            <FaTrash />
+            <FaTrash className="mx-1"/>
         Delete
         </button>
     );
